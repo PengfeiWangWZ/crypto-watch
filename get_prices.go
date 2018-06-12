@@ -40,3 +40,23 @@ func getLatestPriceByProduct(product string) (*TickPrice, error) {
 	err = json.Unmarshal(response, productTicker)
 	return productTicker, err
 }
+
+func getDetailedOrders(orderBook OrderBook, isBid bool) ([]Order) {
+	orders := []Order{}
+	if isBid {
+		for _, bid := range orderBook.Bids {
+			orders = append(orders, Order{
+				Price: bid[0].(string),
+				Volume: bid[1].(string),
+			})
+		}
+	} else {
+		for _, bid := range orderBook.Bids {
+			orders = append(orders, Order{
+				Price: bid[0].(string),
+				Volume: bid[1].(string),
+			})
+		}
+	}
+	return orders
+}

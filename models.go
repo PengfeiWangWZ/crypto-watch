@@ -1,9 +1,14 @@
 package main
 
 type OrderBook struct {
-	Sequence int `json:"sequence"`
-	Bids interface{} `json:"bids"`
-	Asks interface{} `json:"asks"`
+	Id   int           `json:"sequence"`
+	Bids [][]interface{} `json:"bids"`
+	Asks [][]interface{} `json:"asks"`
+}
+
+type Order struct {
+	Price string
+	Volume string
 }
 
 type TickPrice struct {
