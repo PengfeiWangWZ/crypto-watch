@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/manifoldco/promptui"
 )
 
@@ -11,7 +10,7 @@ func selectCoin(coins []Option) (int, error) {
 		Help:     "Use the arrow keys to navigate: ↓ ↑",
 		Active:   "\U0001F4b0   {{ .Coin | cyan }}",
 		Selected: "\U0001F4b0  {{ .Option | cyan }}",
-		Inactive: "{{ .Coin }}",
+		Inactive: "     {{ .Coin }}",
 		Details:  "------End------",
 	}
 

@@ -12,17 +12,15 @@ var (
 
 func userInterface(product string) {
 	grid := tui.NewGrid(0, 0)
-	// COLOR IT
+
 	coinLabel := tui.NewLabel(fmt.Sprintf("Coin: %s", product))
 	priceLabel := tui.NewLabel("Price: ")
-	// fmt.Sprintf("Price: %s", tickPrice.Price)
 	grid.AppendRow(tui.NewHBox(coinLabel, priceLabel))
 
 	headerBar := tui.NewVBox(grid)
-	headerBar.SetTitle(name)
+	headerBar.SetTitle(App)
 	headerBar.SetBorder(true)
 
-	// left and right side
 	asksAdds := tui.NewVBox()
 	asksAdds.SetSizePolicy(tui.Expanding, tui.Maximum)
 	asksBox := tui.NewVBox(tui.NewVBox(
@@ -39,7 +37,6 @@ func userInterface(product string) {
 	bidsBox.SetTitle("Bids")
 	bidsBox.SetBorder(true)
 
-	// finish
 	orderBookBox := tui.NewHBox(asksBox, bidsBox)
 	orderBookBox.SetSizePolicy(tui.Preferred, tui.Expanding)
 	root := tui.NewVBox(headerBar, orderBookBox)
@@ -71,6 +68,10 @@ func update(ui tui.UI, priceLabel *tui.Label, asksAdds, bidsAdds *tui.Box) {
 				if orderBook != nil {
 					asks := getDetailedOrders(*orderBook, false)
 					bids := getDetailedOrders(*orderBook, true)
+					for index := 0; index < len(asks); index ++ {
+						asksAdds.Remove(index)
+						bidsAdds.Remove(index)
+					}
 					for _, order := range asks {
 						asksAdds.Append(tui.NewHBox(
 							tui.NewLabel(order.Price),
@@ -105,6 +106,6 @@ func fetch(product string) {
 			TickPriceInfo: tickPrice,
 			OrderBookInfo: orderBook,
 		}
-		time.Sleep(5 * time.Second)
+		time.Sleep(refreshFreq * time.Second)
 	}
 }

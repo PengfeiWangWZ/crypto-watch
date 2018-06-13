@@ -25,3 +25,8 @@ type Option struct {
 	Coin string
 	Option string
 }
+
+type ProductInfo struct {
+	TickPriceInfo *TickPrice
+	OrderBookInfo *OrderBook
+}
