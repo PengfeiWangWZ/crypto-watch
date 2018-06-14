@@ -40,7 +40,7 @@ func userInterface(product string) {
 	orderBookBox := tui.NewHBox(asksBox, bidsBox)
 	orderBookBox.SetSizePolicy(tui.Preferred, tui.Expanding)
 	root := tui.NewVBox(headerBar, orderBookBox)
-	ui, err := tui.New(root)
+	ui := tui.New(root)
 	
 	ui.SetKeybinding("Ctrl+C", func() { ui.Quit() })
 	ui.SetKeybinding("ESC", func() { ui.Quit() })
@@ -49,7 +49,7 @@ func userInterface(product string) {
 	go update(ui, priceLabel, asksAdds, bidsAdds)
 	go fetch(product)
 	
-	err = ui.Run()
+	err := ui.Run()
 	if err != nil {
 		fmt.Println(err)
 	}
