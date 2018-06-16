@@ -51,10 +51,10 @@ func getDetailedOrders(orderBook OrderBook, isBid bool) ([]Order) {
 			})
 		}
 	} else {
-		for _, bid := range orderBook.Bids {
+		for _, ask := range orderBook.Asks {
 			orders = append(orders, Order{
-				Price:  bid[0].(string),
-				Volume: bid[1].(string),
+				Price:  ask[0].(string),
+				Volume: ask[1].(string),
 			})
 		}
 	}

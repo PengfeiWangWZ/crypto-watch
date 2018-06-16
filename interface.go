@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"sort"
 	"github.com/marcusolsson/tui-go"
 )
 
@@ -68,18 +69,20 @@ func update(ui tui.UI, priceLabel *tui.Label, asksAdds, bidsAdds *tui.Box) {
 				if orderBook != nil {
 					asks := getDetailedOrders(*orderBook, false)
 					bids := getDetailedOrders(*orderBook, true)
+					sort.Sort(sort.Reverse(ByPrice(asks)))
+					sort.Sort(ByPrice(bids))
 					for index := 0; index < len(asks); index ++ {
 						asksAdds.Remove(index)
 						bidsAdds.Remove(index)
 					}
 					for _, order := range asks {
-						asksAdds.Append(tui.NewHBox(
+						asksAdds.Prepend(tui.NewHBox(
 							tui.NewLabel(order.Price),
 							tui.NewLabel(order.Volume),
 						))
 					}
 					for _, order := range bids {
-						bidsAdds.Append(tui.NewHBox(
+						bidsAdds.Prepend(tui.NewHBox(
 							tui.NewLabel(order.Price),
 							tui.NewLabel(order.Volume),
 						))

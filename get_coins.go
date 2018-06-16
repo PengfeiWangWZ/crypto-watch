@@ -9,7 +9,7 @@ func selectCoin(coins []Option) (int, error) {
 		Label:    "Select a coin",
 		Help:     "Use the arrow keys to navigate: ↓ ↑",
 		Active:   "\U0001F4b0   {{ .Coin | cyan }}",
-		Selected: "\U0001F4b0  {{ .Option | cyan }}",
+		Selected: "\U0001F4b0   {{ .Option | cyan }}",
 		Inactive: "     {{ .Coin }}",
 		Details:  "------End------",
 	}
