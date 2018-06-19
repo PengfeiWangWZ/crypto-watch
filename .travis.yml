@@ -1,0 +1,17 @@
+sudo: required
+services:
+  - docker
+
+language: go
+go: 
+ - 1.10.x
+
+before_deploy:
+  - docker build -t "${IMAGE_NAME}:latest" .
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PWD"
+
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest"
+  on:
+    branch: master
